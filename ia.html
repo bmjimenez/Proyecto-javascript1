@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Presupuesto App</title>
+</head>
+<body>
+
+  <h1>Mi Presupuesto</h1>
+  <button id="btnIniciar">Iniciar Aplicación</button>
+
+  <script type="module">
+    import Ingreso from './js/Ingreso.mjs';
+    import Egreso from './js/Egreso.mjs';
+
+    const arrayIngresos = [
+      new Ingreso('Salario', 20000),
+      new Ingreso('Venta auto', 50000)
+    ];
+
+    const arrayEgresos = [
+      new Egreso('Renta', 4000),
+      new Egreso('Ropa', 800)
+    ];
+
+    const totalIngresos = () =>
+      arrayIngresos.reduce((total, ingreso) => total + ingreso.getValor(), 0);
+
+    const totalEgresos = () =>
+      arrayEgresos.reduce((total, egreso) => total + egreso.getValor(), 0);
+
+    function iniciarAplicacion() {
+      const presupuesto = totalIngresos() - totalEgresos();
+      const porcentajeEgreso = (totalEgresos() / totalIngresos()) * 100;
+  
+        console.log("Presupuesto: " + "$" + presupuesto);
+        console.log("Porcentaje de Egreso: " + "$" + porcentajeEgreso.toFixed(2) + "%");
+        console.log("Total de Ingresos: " + "$"+ totalIngresos());
+        console.log("Total de Egresos: " + "$" + totalEgresos());
+
+
+      
+    }
+
+    // ✅ Enlazar el botón al evento
+    document.getElementById('btnIniciar').addEventListener('click', iniciarAplicacion);
+  </script>
+
+</body>
+</html>
