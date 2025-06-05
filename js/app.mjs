@@ -42,7 +42,7 @@ const { presupuesto, porcentajeEgreso } = cargarCabecero();
 export function iniciarAplicacion() {
 // Esta función inicia la aplicación, carga el cabecero y muestra los calculos
   cargarCabecero();
-console.log("Aplicación iniciada");
+console.log("Aplicación iniciada en app.mjs");
 console.log("Presupuesto: " + presupuesto);
 console.log("Porcentaje de Egreso: " + porcentajeEgreso.toFixed(2) + "%");
 console.log("Total de Ingresos: " + totalIngresos());
