@@ -4,12 +4,12 @@
 import {Dato} from './Dato.mjs';
 
 
-export const contadorEgresos = 0; // Contador para los ingresos
+let contadorEgresos = 0; // Contador para los ingresos
 // Definición de la clase Egreso
-export class Egreso extends Dato {
+export default class Egreso extends Dato {
   constructor(nombre, valor) {
     super(nombre,valor)
-  this._id= contadorEgresos++;
+  this._id = contadorEgresos++;
   }
 
   

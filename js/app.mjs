@@ -33,12 +33,20 @@ const totalEgresos = () =>
     const presupuesto = totalIngresos() - totalEgresos();
     const porcentajeEgreso = (totalEgresos() / totalIngresos()) * 100;
     return { presupuesto, porcentajeEgreso }; // Devolvemos un objeto con ambas variables
+
+
       }
 
 const { presupuesto, porcentajeEgreso } = cargarCabecero();
 
+export function iniciarAplicacion() {
+// Esta función inicia la aplicación, carga el cabecero y muestra los calculos
+  cargarCabecero();
+console.log("Aplicación iniciada");
 console.log("Presupuesto: " + presupuesto);
 console.log("Porcentaje de Egreso: " + porcentajeEgreso.toFixed(2) + "%");
 console.log("Total de Ingresos: " + totalIngresos());
 console.log("Total de Egresos: " + totalEgresos());
+}
+
 
