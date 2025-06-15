@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<!-- saved from url=(0083)file:///Users/bernardo/Documents/TecMilenio/Curso_Javascript/Proyecto_JS/index.html -->
+<html lang="es" class="hydrated"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Curso programacion con JavaScript 1 Tec Milenio-->
+    <!-- Creado el 29 de mayo de 2025 por: Bernardo Moya Jimenezb bmjimenez@hotmail.com---->
+    <style data-styles="">ion-icon{visibility:hidden}.hydrated{visibility:inherit}</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presupuesto</title>
+    <!-- Sources de Javascript ---->
+    <script src="file:///Users/bernardo/Documents/TecMilenio/Curso_Javascript/Proyecto_JS/js/app.js"></script>
+    <script src="file:///Users/bernardo/Documents/TecMilenio/Curso_Javascript/Proyecto_JS/js/Dato.js"></script>
+    <script src="file:///Users/bernardo/Documents/TecMilenio/Curso_Javascript/Proyecto_JS/js/Egreso.js"></script>
+    <script src="file:///Users/bernardo/Documents/TecMilenio/Curso_Javascript/Proyecto_JS/js/Ingreso.js"></script>
+
+    <!-- Sources de iconos ---->
+    <script type="module" src="./Presupuesto_files/ionicons.esm.js"></script>
+    <script nomodule="" src="./Presupuesto_files/ionicons.js"></script>
+   
+    
+    <!-- Sources de CSS --    -->
+    <link rel="stylesheet" href="./Presupuesto_files/estilos.css">
+</head>
+<body>
+    <!----------------------- Cabecero de la pagina------------------------->
+    <div class="cabecero">
+        <div class="presupuesto">   
+            <div class="presupuesto_titulo">
+              Presupuesto disponible
+            </div>
+       
+            <div class="presupuesto_valor">
+                +$2000.00
+            </div>
+
+            <div class="presupuesto_ingreso limpiarEstilos">
+                <div class="presupuesto_ingreso--texto">
+                    Ingresos
+                </div>
+                <div class="derecha">
+                    <div class="presupuesto_ingreso--valor">
+                        +$4000.00
+                    </div>
+                    <div class="presupuesto_ingreso--porcentaje">
+                        25%
+                    </div>
+                </div>
+            </div><!--presupuesto_egreso limpiarEstilos---->
+
+            <div class="presupuesto_egreso limpiarEstilos">
+                <div class="presupuesto_egreso--texto">
+                    Egresos 
+                </div>
+                <div class="derecha limpiarEstilos">
+                    <div class="presupuesto_egreso--valor">
+                        $-1900
+                    </div>
+                    <div class="presupuesto_egreso--porcentaje">
+                        50%
+                    </div>
+                </div>
+            </div><!--presupuesto_egreso limpiarEstilos---->
+
+        </div><!--presupuesto---->
+        
+    </div>
+    <!----------------------- Termina Cabecero de la pagina------------------------->
+
+    <!--Formulario de ingreso de datos ingreos y egresos---->
+    <form id="forma">
+        <div class="agregar">
+            <div class="agregar_contenedor">
+
+                    <select class="agregar_tipo" name="tipo" id="tipo">
+                        <option value="ingreso">+</option>
+                        <option value="egreso">-</option>
+                    </select>
+                
+                    <input class="agregar_descripcion" type="text" id="descripcion" placeholder="Agregar descripcion">
+                
+                    <input class="agregar_valor" type="number" id="valor" value="0" step="any" placeholder="Valor">
+                
+                    <button type="submit" class="agregar_btn"><ion-icon name="checkmark-circle-outline" role="img" class="md hydrated"><template shadowrootmode="open"><div class="icon-inner"><svg xmlns="http://www.w3.org/2000/svg" class="ionicon s-ion-icon" viewBox="0 0 512 512"><path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" stroke-miterlimit="10" class="ionicon-fill-none ionicon-stroke-width"></path><path stroke-linecap="round" stroke-linejoin="round" d="M352 176L217.6 336 160 272" class="ionicon-fill-none ionicon-stroke-width"></path></svg></div></template></ion-icon></button>    
+            </div><!-- termina contenedor agregar_contenedor---->        
+        </div><!-- temina contenedor agregar---->
+    </form>
+    <!--termina formulario de ingreso de datos ingresos y egresos-->
+    
+    <!-- ----------------------- Comienza contenedor de lista de datos ingresos y egresos--------------------------->
+    <div class="contenedor limpiarEstilos row-direction">
+
+        <!--Contenedor de Lista de Ingresos-->
+        <div class="ingreso">
+            <h2 class="ingreso_titulo">Ingresos</h2>
+            <div id="lista_ingresos">
+                <div class="elemento limpiarEstilos">
+                    <div class="elemento_descripcion">
+                        Salario
+                    </div>
+                    <div class="derecha limpiarEstilos">
+                        <div class="elemento_valor">
+                            +$2,200.00
+                        </div>
+                        <div class="elemento_eliminar">
+                                <button class="elemento_eliminar--btn" id="eliminar_ingreso_1">
+                                <ion-icon name="close-circle-outline" role="img" class="md hydrated"><template shadowrootmode="open"><div class="icon-inner"><svg xmlns="http://www.w3.org/2000/svg" class="ionicon s-ion-icon" viewBox="0 0 512 512"><path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" stroke-miterlimit="10" class="ionicon-fill-none ionicon-stroke-width"></path><path stroke-linecap="round" stroke-linejoin="round" d="M320 320L192 192M192 320l128-128" class="ionicon-fill-none ionicon-stroke-width"></path></svg></div></template></ion-icon>
+                                </button>
+                        </div>
+                    </div>
+                </div>
+                <!--termina primer elemento de lista_ingresos---->
+              </div>
+                <div class="elemento limpiarEstilos">
+                    <div class="elemento_descripcion">
+                        Venta coche
+                    </div>
+                    <div class="derecha limpiarEstilos">
+                        <div class="elemento_valor">
+                            +$1,500.00
+                        </div>
+                        <div class="elemento_eliminar">
+                            <button class="elemento_eliminar--btn" id="eliminar_ingreso_1">
+                            <ion-icon name="close-circle-outline" role="img" class="md hydrated"><template shadowrootmode="open"><div class="icon-inner"><svg xmlns="http://www.w3.org/2000/svg" class="ionicon s-ion-icon" viewBox="0 0 512 512"><path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" stroke-miterlimit="10" class="ionicon-fill-none ionicon-stroke-width"></path><path stroke-linecap="round" stroke-linejoin="round" d="M320 320L192 192M192 320l128-128" class="ionicon-fill-none ionicon-stroke-width"></path></svg></div></template></ion-icon>
+                            </button>
+                        </div>
+                </div>
+            </div><!--termina contenedor lista_ingresos---->
+        </div><!--termina contenedor ingreso---->  
+       
+        <!--Contenedo deLista de Egresos-->
+        <div class="egreso">   
+
+            <h2 class="egreso_titulo">Egresos</h2>
+            <div id="lista_egresos">
+                <div class="elemento limpiarEstilos">
+                    <div class="elemento_descripcion">
+                        Renta de casa
+                    </div>
+                    <div class="derecha limpiarEstilos">
+                        <div class="elemento_valor">
+                            $-900.00
+                        </div>
+                        <div class="elemento_porcentaje">
+                            21%
+                        </div>
+                        <div class="elemento_eliminar">
+                            <button class="elemento_eliminar--btn" id="eliminar_egreso_1">
+                                <ion-icon name="close-circle-outline" role="img" class="md hydrated"><template shadowrootmode="open"><div class="icon-inner"><svg xmlns="http://www.w3.org/2000/svg" class="ionicon s-ion-icon" viewBox="0 0 512 512"><path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" stroke-miterlimit="10" class="ionicon-fill-none ionicon-stroke-width"></path><path stroke-linecap="round" stroke-linejoin="round" d="M320 320L192 192M192 320l128-128" class="ionicon-fill-none ionicon-stroke-width"></path></svg></div></template></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--termina primer elemento de lista_egresos---->
+            <div class="elemento limpiarEstilos">
+                <div class="elemento_descripcion">
+                    Ropa
+                </div>
+                <div class="derecha limpiarEstilos">
+                    <div class="elemento_valor">
+                        $-400.00
+                    </div>
+                    <div class="elemento_porcentaje">
+                        9%
+                    </div>
+                    <div class="elemento_eliminar">
+                        <button class="elemento_eliminar--btn" id="eliminar_egreso_1">
+                            <ion-icon name="close-circle-outline" role="img" class="md hydrated"><template shadowrootmode="open"><div class="icon-inner"><svg xmlns="http://www.w3.org/2000/svg" class="ionicon s-ion-icon" viewBox="0 0 512 512"><path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" stroke-miterlimit="10" class="ionicon-fill-none ionicon-stroke-width"></path><path stroke-linecap="round" stroke-linejoin="round" d="M320 320L192 192M192 320l128-128" class="ionicon-fill-none ionicon-stroke-width"></path></svg></div></template></ion-icon>
+                        </button>
+                    </div>
+                </div>
+
+        </div><!--termina contenedor egresos---->
+    </div><!--contenedor de lista de datos---->
+
+
+
+          
+   
+
+
+</div></body></html>
