@@ -60,7 +60,7 @@ export function agregarElemento() {
             console.log(`Ingreso agregado: ${nuevoIngreso.getNombre()} : $${nuevoIngreso.getValor()}`);
             console.log(arrayIngresos);
             //Pintar array ingresos en html
-            getVistaCabecero(); // Llamar a la función para actualizar el cabecero
+            //getVistaCabecero(); // Llamar a la función para actualizar el cabecero
             //getVistaIngresos(); // Llamar a la función para actualizar la vista de ingresos
             //HTML para mostrar los ingresos
             //IngresosHTML = document.getElementById('ingreso-lista');
@@ -91,14 +91,9 @@ export function agregarElemento() {
         }
     }
 }
-    // Llamar a la función para cargar el cabecero y mostrar los cálculos actualizados
-    /*cargarCabecero22();//llamada temporalmente asi
-    console.log("Presupuesto: " + "$" + Totalpresupuesto); //funcion para mostrar el presupuesto, falta agregarle html
-    console.log("Porcentaje de Egreso: " + porcentajeEgreso.toFixed(2) + "%");
-    console.log("Total de Ingresos: " + "$" + totalIngresos());
-    console.log("Total de Egresos: " + "$" + totalEgresos());*/
-
-    // actualizarVista();
+    //Pendientes 
+    // Hay que evaluar si hacer una funcion para pintar los ingresos y egresos en el html en una sola funcion
+    //Reemplazar variables de la funcion get Element ue correspondan a los ingresos y egresos
 
 
 
@@ -136,34 +131,30 @@ export function agregarElemento() {
 
     
     
-
     
-    //Pintar html del cabecero
+    //Funcion para Pintar dinamicamente el html del cabecero
     function cargarCabecero2() {
- // Porcentaje de Ingreso, verificamos que el total de ingresos no sea cero para evitar división por cero
-        
-       
-        
-        
 
-       // let TotalpresupuestoHTML = document.getElementById('presupuesto').textContent = `$${Totalpresupuesto.toFixed(2)}`;
-        let Totalpresupuesto =  totalIngresos()-totalEgresos() ;// Actualizamos los datos del cabecero
-        console.log("Total del presupuesto: " + Totalpresupuesto);
+        // Actualizamos los datos del presupuesto disponible,Total de Ingresos,Total de Egresos y porcentaje de egreso
+        let Totalpresupuesto =  totalIngresos()-totalEgresos() ;
+        console.log("Total del presupuesto: " + Totalpresupuesto);//linea temporal para ver el total del presupuesto en consola
         let TotalpresupuestoHTML = `$${Totalpresupuesto.toFixed(2)}`+ ' MXN'; // Formateamos el total del presupuesto a dos decimales y agregamos la moneda
-        console.log("Total del presupuesto disponible HTML: " + TotalpresupuestoHTML);
+        console.log("Total del presupuesto disponible HTML: " + TotalpresupuestoHTML);// linea temporal para ver el total del presupuesto en consola
         document.getElementById('presupuesto').innerHTML = TotalpresupuestoHTML;
 
-        document.getElementById('ingresos').innerHTML = `$${totalIngresos().toFixed(2)}`;
-        document.getElementById('egresos').innerHTML= `$${totalEgresos().toFixed(2)}`;
+        // Carga valores totales de ingresos y egresos
+        document.getElementById('ingresos').innerHTML = `$${totalIngresos().toFixed(2)}`+ ' MXN';;
+        document.getElementById('egresos').innerHTML= `$${totalEgresos().toFixed(2)}`+ ' MXN';;
 
-        // Porcentaje de Egreso, verificamos que el total de ingresos no sea cero para evitar división por cero
+        // Porcentaje de Egreso, validar que totalIngresos() no sea cero para evitar división por cero
         if (totalIngresos() === 0) {
             porcentajeEgreso = 0; // Si no hay ingresos, el porcentaje de egreso es 0
         } else {
             porcentajeEgreso = ((totalEgresos() * 100)/ totalIngresos());
         }
-
+        //Escribimos el valor de porcentaje-egresos en HTML 
         document.getElementById('porcentaje-egresos').innerHTML = `${porcentajeEgreso.toFixed(2)}%`;
+        
         return { Totalpresupuesto, porcentajeIngreso,porcentajeEgreso };
 //aqui me quede 
 
@@ -171,43 +162,7 @@ export function agregarElemento() {
 
     }
 
-    // Función para cargar el cabecero con el presupuesto y porcentaje de egreso
-
-    function cargarCabecero() {
-        
-        console.log("totalIngresos cabecero: " + totalIngresos());
-        console.log("totalIngresos tipo variable: " + typeof(totalIngresos()));
-        console.log("totalEgresos cabecero: " + totalEgresos());
-        console.log("totalEgresos tipo variable: " + typeof(totalEgresos()));
-        Totalpresupuesto = totalIngresos() - totalEgresos(); // Calculamos el total del presupuesto restando los ingresos y egresos
-        console.log("Total del presupuesto cabecero: " + Totalpresupuesto);
-        console.log("Total del presupuesto tipo variable: " + typeof(Totalpresupuesto));
-
-
-        // Porcentaje de Ingreso, verificamos que el total de ingresos no sea cero para evitar división por cero
-        if (Totalpresupuesto === 0) {
-            porcentajeIngreso = 0; // Si no hay ingresos, el presupuesto es 0
-        } else {
-            porcentajeIngreso = ((totalIngresos * 100)/totalIngresos); // Calculamos el porcentaje de egreso
-        }
-       
-        // Porcentaje de Egreso, verificamos que el total de ingresos no sea cero para evitar división por cero
-        if (Totalpresupuesto === 0) {
-            porcentajeEgreso = 0; // Si no hay ingresos, el porcentaje de egreso es 0
-        } else {
-            porcentajeEgreso = ((totalEgresos * 100)/ totalIngresos);
-        }
-        
-        return { Totalpresupuesto, porcentajeIngreso,porcentajeEgreso }; // Devolvemos un objeto con ambas variables
-    }
-    // { Totalpresupuesto, porcentajeEgreso } = cargarCabecero();
-
-    function getVistaCabecero() {
-        // Llamamos a la función para cargar el cabecero
-        //cargarCabecero2();
-        
-    }
-
+    
     export function iniciarAplicacion() {
        
         // Llamar a la función para cargar el cabecero y mostrar los cálculos actualizados
