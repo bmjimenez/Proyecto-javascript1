@@ -13,7 +13,8 @@ let arrayEgresos = [];
 // Funciones para calcular el total de ingresos y egresos
  let totalIngresos = () => arrayIngresos.reduce((total, ingreso) => total + ingreso.getValor(), 0);
  let totalEgresos = () => arrayEgresos.reduce((total, egreso) => total + egreso.getValor(), 0);
-
+console.log("Total de Ingresos: " + totalIngresos());
+console.log("Total de Egresos: " + totalEgresos());
 
 let Totalpresupuesto = 0;
 let porcentajeIngreso = 0;
@@ -50,13 +51,22 @@ export function agregarElemento() {
         if (nombreIngreso && !isNaN(valorIngreso) && valorIngreso > 0) {
             const nuevoIngreso = new Ingreso(nombreIngreso, valorIngreso);
             arrayIngresos.push(nuevoIngreso);
-             // Sumar el ingreso a  total  de Ingresos 
+             // Sumar el egreso a  total  de egresos 
             totalIngresos = () => arrayIngresos.reduce((total, ingreso) => total + ingreso.getValor(), 0);
-            
+            // Llamar a la función para actualizar el cabecero
             cargarCabecero2(); // Llamar a la función para actualizar el cabecero
-            getVistaIngresos(); //  //Pintar array ingresos en html
-            //inicializarBotonAgregar(); // Llamar a la función para inicializar el botón de agregar
+            //getVistaEgresos(); // Llamar a la función para actualizar la vista de egresos
+
+            console.log(`Ingreso agregado: ${nuevoIngreso.getNombre()} : $${nuevoIngreso.getValor()}`);
+            console.log(arrayIngresos);
+            //Pintar array ingresos en html
+            getVistaIngresos(); // Llamar a la función para actualizar la vista de ingresos
             
+            //getVistaIngresos(); // Llamar a la función para actualizar la vista de ingresos
+            //HTML para mostrar los ingresos
+            //IngresosHTML = document.getElementById('ingreso-lista');
+            //IngresosHTML.document.innerHTML += `INGRESOS44`;
+            //getVistaIngresos(); // Llamar a la función para actualizar la vista de ingresos
 
         } else {
             console.error("Por favor, ingrese un nombre y un valor válido para el ingreso.");
@@ -70,10 +80,10 @@ export function agregarElemento() {
             arrayEgresos.push(nuevoEgreso);
              // Sumar el egreso a  total  de egresos 
             totalEgresos = () => arrayEgresos.reduce((total, egreso) => total + egreso.getValor(), 0);
-            
+            // Llamar a la función para actualizar el cabecero
             cargarCabecero2(); // Llamar a la función para actualizar el cabecero
-            getVistaEgresos(); // Llamar a la función para actualizar la vista de egresos
-            //inicializarBotonAgregar(); // Llamar a la función para inicializar el botón de agregar
+            //getVistaEgresos(); // Llamar a la función para actualizar la vista de egresos
+
             console.log(`Egreso agregado: ${nuevoEgreso.getNombre()} : $${nuevoEgreso.getValor()}`);
             console.log(arrayEgresos);
             //Pintar array egresos en html
@@ -82,41 +92,20 @@ export function agregarElemento() {
         }
     }
 }
+    //Pendientes 
+    // Hay que evaluar si hacer una funcion para pintar los ingresos y egresos en el html en una sola funcion
+    //Reemplazar variables de la funcion get Element ue correspondan a los ingresos y egresos
 
-// Función para mostrar los ingresos en la lista-ingresos en HTML
 function getVistaIngresos() {
-    
-    // Crear un elemento HTML para mostrar el ingreso
-    const listaIngresos = document.getElementById('lista_ingresos');
-    listaIngresos.innerHTML = ''; // Limpiar la lista antes de agregar nuevos elementos
     // Obtener el elemento HTML donde se mostrarán los ingresos
     for (let i = 0; i < arrayIngresos.length; i++) {
         const elementoIngreso = arrayIngresos[i];
-        const descripcion = elementoIngreso.getNombre();
-        const valor = elementoIngreso.getValor();
-        const id = elementoIngreso.getID();
-
-        // Crear un nuevo ingreso en HTML dentro del contenedor lista-ingresos
-          listaIngresos.innerHTML += `
-                                <div class="elemento limpiarEstilos">
-                                        <div class="elemento_descripcion">
-                                            ${descripcion}
-                                        </div>
-                                    <div class="derecha limpiarEstilos">
-                                            <div class="elemento_valor">
-                                            ${valor.toFixed(2)} MXN
-                                            </div>
-
-                                        <div class="elemento_eliminar">
-                                            <button class="elemento_eliminar--btn" data-id="${id}">
-                                                <ion-icon name="close-circle-outline"></ion-icon>
-                                            </button>
-                                        </div><!-- termina elemento_eliminar-->
-                                    </div><!termina derecha limpiarEstilos-->                        
-                                </div><!-- termina elemento limpiarEstilos-->
-                                `;
-    }
-}   
+        const descripcion = elementoIngresoingreso.getNombre();
+        const valor = elementoIngresoingreso.getValor();
+        const id = elementoIngresoingreso.getID();
+        // Crear un elemento HTML para mostrar el ingreso
+    const ingresoHTML = document.getElementById('ingreso-lista');  
+}
 
     export function eliminarIngresos(event) {
         if (event.target.classList.contains('eliminar-ingreso')) {
@@ -134,63 +123,7 @@ function getVistaIngresos() {
         }
     }
 
-// Función para mostrar los egresos en la lista-egresos en HTML
-function getVistaEgresos() 
-{
-
-    // Crear un elemento HTML para mostrar el ingreso
-    const listaEgresos = document.getElementById('lista_egresos');
-    listaEgresos.innerHTML = ''; // Limpiar la lista antes de agregar nuevos elementos
-    // Obtener el elemento HTML donde se mostrarán los ingresos
-    for (let i = 0; i < arrayEgresos.length; i++)
-     {
-        const elementoEgreso = arrayEgresos[i];
-        const descripcion = elementoEgreso.getNombre();
-        const valor = elementoEgreso.getValor();
-        const id = elementoEgreso.getID();
-
-        // Crear un nuevo ingreso en HTML dentro del contenedor lista-ingresos
-          listaEgresos.innerHTML += `
-                                <div class="elemento limpiarEstilos">
-                                        <div class="elemento_descripcion">
-                                            ${descripcion}
-                                        </div>
-                                    <div class="derecha limpiarEstilos">
-                                            <div class="elemento_valor">
-                                            ${-valor.toFixed(2)} MXN
-                                            </div>
-
-                                        <div class="elemento_eliminar">
-                                            <button class="elemento_eliminar--btn" data-id="${id}">
-                                                <ion-icon name="close-circle-outline"></ion-icon>
-                                            </button>
-                                        </div><!-- termina elemento_eliminar-->
-                                    </div><!termina derecha limpiarEstilos-->                        
-                                </div><!-- termina elemento limpiarEstilos-->
-                                `;
-
-    }   
-}
-    
- function inicializarBotonAgregar()
- {
-    const agregarDescripcion = document.getElementById('descripcion');
-    const agregarValor = document.getElementById('valor');
-    // Inicializar los campos de entrada para agregar un nuevo ingreso o egreso
-    agregarDescripcion.innerHTML = '';
-    agregarValor.innerHTML = '';
-
-    agregarDescripcion.innerHTML = `
-            <input class="agregar_descripcion" type="text" id="descripcion" placeholder="Agregar descripcion">
-            `;
-    agregarValor.innerHTML = `
-            <input class="agregar_valor" type="number" id="valor" step="any" placeholder="Valor"></input>
-            `;
-    }
- 
-
-
-    export function eliminarEgresos2(event) {
+    export function eliminarEgresos(event) {
         if (event.target.classList.contains('eliminar-egreso')) {
             const idEgreso = parseInt(event.target.dataset.id, 10);
 
@@ -210,8 +143,7 @@ function getVistaEgresos()
     
     
     //Funcion para Pintar dinamicamente el html del cabecero
-    function cargarCabecero2() 
-    {
+    function cargarCabecero2() {
 
         // Actualizamos los datos del presupuesto disponible,Total de Ingresos,Total de Egresos y porcentaje de egreso
         let Totalpresupuesto =  totalIngresos()-totalEgresos() ;
@@ -232,31 +164,13 @@ function getVistaEgresos()
         }
         //Escribimos el valor de porcentaje-egresos en HTML 
         document.getElementById('porcentaje-egresos').innerHTML = `${porcentajeEgreso.toFixed(2)}%`;
-    
-        // Inicializar los campos de entrada para agregar un nuevo ingreso o egreso
-        const agregarDescripcion = document.getElementById('descripcion');
-        const agregarValor = document.getElementById('valor');
-   
-        agregarDescripcion.innerHTML = '';
-        agregarValor.innerHTML = '';
-
-        agregarDescripcion.innerHTML = `
-            <input class="agregar_descripcion" type="text" id="descripcion" placeholder="Agregar descripcion">
-            `;
-        agregarValor.innerHTML = `
-            <input class="agregar_valor" type="number" id="valor" step="any" placeholder="Valor"></input>
-            `;
-    
-        return { Totalpresupuesto, porcentajeIngreso,porcentajeEgreso };
-}
- 
-
         
- 
+        return { Totalpresupuesto, porcentajeIngreso,porcentajeEgreso };
+//aqui me quede 
 
 
 
-    
+    }
 
     
     export function iniciarAplicacion() {

@@ -19,7 +19,7 @@ export default class Egreso extends Dato {
     this.valor = nuevoValor;
   }
 // Metodo para obtener el ID del egreso
-get getID() {
+getID() {
     return this._id;
   }
 
