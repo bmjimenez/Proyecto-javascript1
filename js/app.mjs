@@ -42,9 +42,7 @@ export function agregarElemento()
     window.tipoIngreso = tipoIngreso
     window.nombreIngreso = nombreIngreso
     window.valor = valorIngreso
-    
-
-    
+    // Validación del tipo de ingreso (ingreso o egreso)
     if (tipoIngreso === 'ingreso') {
         // Validación de los campos de ingreso
         if (nombreIngreso && !isNaN(valorIngreso) && valorIngreso > 0) {
@@ -165,19 +163,44 @@ const cargarEgresos= () =>
 
 // Función para eliminar un ingreso por su ID
 export function eliminarIngreso(id) {
-    arrayIngresos = arrayIngresos.filter(ingreso => ingreso.getID() !== id);
-    console.log(`Ingreso con ID ${id} eliminado.`);
-    cargarIngresos(); // vuelve a pintar la lista
+let resultado = window.confirm("¿Estás seguro de que quieres eliminar este registro?");
+if (resultado) {
+  // El usuario hizo clic en "Aceptar"
+   // Aquí va el código para eliminar el elemento
+  arrayIngresos = arrayIngresos.filter(ingreso => ingreso.getID() !== id);
+  console.log(`Ingreso con ID ${id} eliminado.`);
+ 
+} else {
+  // El usuario hizo clic en "Cancelar"
+  // Aquí va el código para manejar la cancelación
+  console.log("Eliminación cancelada");
+  window.alert("Eliminación cancelada");
+  
+}
     cargarCabecero2(); // actualiza los totales y porcentajes
+    cargarIngresos(); // vuelve a pintar la lista
+    
 }
   window.eliminarIngreso = eliminarIngreso;  
 
 // Función para eliminar un egreso por su ID
 export function eliminarEgreso(id) {
+    let resultado = window.confirm("¿Estás seguro de que quieres eliminar este registro?");
+if (resultado) {
+  // El usuario hizo clic en "Aceptar"
+   // Aquí iría el código para eliminar el elemento
     arrayEgresos = arrayEgresos.filter(egreso => egreso.getID() !== id);
     console.log(`Egreso con ID ${id} eliminado.`);
-    cargarEgresos();     // vuelve a pintar la lista de egresos
+    } else {
+  // El usuario hizo clic en "Cancelar"
+  // Aquí iría el código para manejar la cancelación
+  console.log("Eliminación cancelada");
+  window.alert("Eliminación cancelada");
+  
+}
     cargarCabecero2();   // actualiza los totales y porcentajes
+    cargarEgresos();     // vuelve a pintar la lista de egresos
+    
 }
 window.eliminarEgreso = eliminarEgreso; // necesario para que funcione desde el HTML
 
