@@ -10,24 +10,23 @@
             <! Sources de Javascript -->
                 <script type="module" src="./js/app.mjs"></script>
 
-
                 <! Sources de iconos -->
                     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
                     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
-
                     <! Sources de CSS -->
                         <link rel="stylesheet" href="./css/estilos.css">
 
-                        <!Importando el módulo de la aplicación>
+                        <!Sources de Javascript, Importando el módulo de la aplicación>
                             <script type="module">
                                 import { iniciarAplicacion } from './js/app.mjs';
                                 // Llamar a la función iniciarAplicacion al cargar la página
                                 window.iniciarAplicacion = iniciarAplicacion;
+                                iniciarAplicacion();
                             </script>
 </head>
 
-<body onload="iniciarAplicacion()"> 
+<body>
     <!----------------------- Cabecero de la pagina------------------------->
     <! Funcion cargarcabecero() en app.mjs se encarga de llenar el presupuesto, ingresos y egresos>
         <div class="cabecero">
@@ -35,11 +34,9 @@
                 <div class="presupuesto_titulo">
                     PRESUPUESTO DISPONIBLE
                 </div>
-
                 <div class="presupuesto_valor" id="presupuesto">
                     <!+$2000.00>
                 </div>
-
                 <div class="presupuesto_ingreso limpiarEstilos">
                     <div class="presupuesto_ingreso--texto">
                         Ingresos
@@ -51,91 +48,86 @@
                         <div class="presupuesto_ingreso--porcentaje" id="porcentaje-ingresos">
                             <!No lleva porcentaje>
                         </div>
-                    </div>
+                    </div><!derecha-->
+                </div><!termina presupuesto_ingreso limpiarEstilos-->
+               
 
-                </div>
-                <!presupuesto_egreso limpiarEstilos-->
-
-                    <div class="presupuesto_egreso limpiarEstilos">
-                        <div class="presupuesto_egreso--texto">
+                <div class="presupuesto_egreso limpiarEstilos"> <!presupuesto_egreso limpiarEstilos-->
+                    <div class="presupuesto_egreso--texto">
                             Egresos
-                        </div>
-                        <div class="derecha limpiarEstilos">
-                            <div class="presupuesto_egreso--valor" id="egresos">
-                                <! $-1900>
-                            </div>
-                            <div class="presupuesto_egreso--porcentaje" id="porcentaje-egresos">
-                                <!50%>
-                            </div>
-                        </div>
                     </div>
-                    <!presupuesto_egreso limpiarEstilos-->
+                    <div class="derecha limpiarEstilos">
+                        <div class="presupuesto_egreso--valor" id="egresos">
+                            <! $-1900>
+                        </div>
+                        <div class="presupuesto_egreso--porcentaje" id="porcentaje-egresos">
+                            <!50%>
+                        </div>
+                    </div><!--derecha limpiarEstilos-->
+                </div><!presupuesto_egreso limpiarEstilos-->
+            </div><!termina presupuesto-->
+        </div><!termina cabecero-->
+        
+    
 
-            </div><!presupuesto-->
+        <!Formulario de ingreso de datos ingreos y egresos-->
+        <form id="forma">
+            <div class="agregar">
+                <div class="agregar_contenedor">
 
-        </div>
-        <!termina cabecero-->
+                    <select class="tipo-ingreso" name="tipo" id="tipo">
+                        <option value="ingreso">+</option>
+                        <option value="egreso">-</option>
+                    </select>
 
-            <!----------------------- Termina Cabecero de la pagina------------------------->
+                    <input class="agregar_descripcion" type="text" id="descripcion" placeholder="Agregar descripcion">
+                    <input class="agregar_valor" type="number" id="valor" step="any" placeholder="Valor">
 
-            <!Formulario de ingreso de datos ingreos y egresos-->
-                <form id="forma">
-                    <div class="agregar">
-                        <div class="agregar_contenedor">
+                    <button type="button" class="agregar_btn"><ion-icon name="checkmark-circle-outline" id="agregar_btn"></ion-icon></button>
+                    <! event listener con llamada a funcion>
 
-                            <select class="tipo-ingreso" name="tipo" id="tipo">
-                                <option value="ingreso">+</option>
-                                <option value="egreso">-</option>
-                            </select>
+                </div> <! termina contenedor agregar_contenedor-->
+            </div> <! temina agregar-->
+        </form> <!--termina formulario de ingreso de datos ingresos y egresos-->
 
-                            <input class="agregar_descripcion" type="text" id="descripcion"
-                                placeholder="Agregar descripcion">
+               
 
-                            <input class="agregar_valor" type="number" id="valor" step="any" placeholder="Valor">
+        <! ------------- Comienza contenedor de lista de datos ingresos y egresos--------------->
+        <div class="contenedor limpiarEstilos row-direction">
 
-                            <button type="button" class="agregar_btn"><ion-icon name="checkmark-circle-outline"
-                                    id="agregar_btn"></ion-icon></button>
-                            <! event listener con llamada a funcion>
+            <! ############  Contenedo de Lista de Ingresos #################-->
+                <div class="ingreso">
+                <h2 class="ingreso_titulo">Ingresos</h2>
 
-                        </div><! termina contenedor agregar_contenedor-->
-                        
-                    </div><! temina contenedor agregar-->
+                    <div id="lista_ingresos"><!-- Contenedor de elementos de la lista de ingresos -->
+                        <! Este contenedor lista_ingresos es llenado por getVistaEgresos() en app.mjs y se
+                        llena con los datos del arreglo de Ingresos-->
+                    </div><!termina contenedor lista_ingresos-->
+                                
+                </div> <!termina contenedor ingreso-->
+
+                           
+            <! ############  Contenedo de Lista de Egresos #################-->
+                <div class="egreso">
+                <h2 class="egreso_titulo">Egresos</h2>
+                    <div id="lista_egresos">
+                        <! Este contenedor es llenado por getVistaEgresos() en app.mjs y se llena
+                        con los datos del arreglo de egresos-->
+                    </div><!termina contenedor lista_egresos-->
+                </div><!termina contenedor de egreso-->
+        </div><!termina contenedor de limpiarestilos-->
                     
-                </form>
-                <!--termina formulario de ingreso de datos ingresos y egresos-->
-
-                <! ------------- Comienza contenedor de lista de datos ingresos y egresos--------------->
-                    <div class="contenedor limpiarEstilos row-direction">
-
-                         <! ############  Contenedo de Lista de Ingresos #################-->
-                                <div class="ingreso">
-                                <h2 class="ingreso_titulo">Ingresos</h2>
-                                    
-                                    <div id="lista_ingresos"><!-- Contenedor de elementos de la lista de ingresos -->
-                                    <! Este contenedor lista_ingresos es llenado por getVistaEgresos() en app.mjs
-                                    y se llena con los datos del arreglo de Ingresos-->
-                                    </div><!termina contenedor lista_ingresos-->
-                                </div>
-                                <!termina contenedor ingreso-->
-
-                        <! ############  Contenedo de Lista de Egresos #################-->
-                                <div class="egreso">
-                                    <h2 class="egreso_titulo">Egresos</h2>
-                                        <div id="lista_egresos">
-                                        <! Este contenedor es llenado por getVistaEgresos() en app.mjs
-                                        y se llena con los datos del arreglo de egresos-->
-                                        </div> <!termina elemento de lista_egresos-->
-                                </div><!termina contenedor de egreso-->
-                    </div><!termina contenedor de limpiarestilos-->
-                                            
-                                                
 
 
-    <script type="module">
-    import { agregarElemento } from './js/app.mjs';
-    // Asignar el evento click al botón de agregar
-    document.getElementById('agregar_btn').addEventListener('click', agregarElemento);
-                                                    </script>
+
+<!-- Importando funcion agregarElemento  desde app.mjs-->
+        <script type="module">
+            import { agregarElemento } from './js/app.mjs';
+            // Asignar el evento click al botón de agregar
+            document.getElementById('agregar_btn').addEventListener('click', agregarElemento);
+            
+            console.log('Script cargado correctamente');
+        </script>
 
 
 

@@ -2,19 +2,18 @@
 
 // Importación de las clases Ingreso y Egreso
 import Ingreso from './Ingreso.mjs';
-
 import Egreso from './Egreso.mjs';
 
 
 // Inicialización de los arrays para almacenar ingresos y egresos
 let arrayIngresos = [];
 let arrayEgresos = [];
-// Esta función temporal inicia la aplicación, carga los calculos del  cabecero 
+
 // Funciones para calcular el total de ingresos y egresos
  let totalIngresos = () => arrayIngresos.reduce((total, ingreso) => total + ingreso.getValor(), 0);
  let totalEgresos = () => arrayEgresos.reduce((total, egreso) => total + egreso.getValor(), 0);
 
-
+// Iniciliazondo Variables para almacenar el total del presupuesto, porcentaje de ingreso y porcentaje de egreso
 let Totalpresupuesto = 0;
 let porcentajeIngreso = 0;
 let porcentajeEgreso = 0;
@@ -24,27 +23,28 @@ window.onload = function () {
     window.ingresos = arrayIngresos
     window.egresos = arrayEgresos
 
-        // Eventos para los botones de agregar ingresos y egresos
-        / document.getElementById('agregar_btn').addEventListener('click', agregarElemento);
+    // Eventos para los botones de agregar ingresos y egresos
+    document.getElementById('agregar_btn').addEventListener('click', agregarElemento);
 
-    // Para el botón eliminar
-    //document.getElementById('eliminar_ingreso_1').addEventListener('click', eliminarIngresos)
+    //Para el botón eliminar
+   // document.getElementById('eliminar_ingreso_1').addEventListener('click', eliminarIngresos)
 }
 
 
-// Función para agregar un ingreso al array de ingresos
-export function agregarElemento() {
-
-// Leemos valors del formulario
+// Función para agregar un elemento a cualquiera de los array de ingresos y egresos
+export function agregarElemento() 
+{
+// Leemos valores del formulario
     const tipoIngreso = document.getElementById('tipo').value;
     const nombreIngreso = document.getElementById('descripcion').value;
     const valorIngreso = parseFloat(document.getElementById('valor').value)|| 0;
     
     window.tipoIngreso = tipoIngreso
     window.nombreIngreso = nombreIngreso
-    //window.nombreEgreso = nombreIngreso
     window.valor = valorIngreso
-    window.valorEgreso = valorIngreso
+    
+
+    
     if (tipoIngreso === 'ingreso') {
         // Validación de los campos de ingreso
         if (nombreIngreso && !isNaN(valorIngreso) && valorIngreso > 0) {
@@ -54,14 +54,15 @@ export function agregarElemento() {
             totalIngresos = () => arrayIngresos.reduce((total, ingreso) => total + ingreso.getValor(), 0);
             
             cargarCabecero2(); // Llamar a la función para actualizar el cabecero
-            getVistaIngresos(); //  //Pintar array ingresos en html
+            cargarIngresos(); //  //Pintar array ingresos en index.html
             //inicializarBotonAgregar(); // Llamar a la función para inicializar el botón de agregar
-            
+           
 
         } else {
-            console.error("Por favor, ingrese un nombre y un valor válido para el ingreso.");
+            console.log("Por favor, ingrese un nombre y un valor válido para el ingreso.");
         }
     } else if (tipoIngreso === 'egreso') {
+        window.valorEgreso = valorIngreso // esta variable no se usa ?
         // Validación de los campos de egreso
         if (nombreIngreso && !isNaN(valorIngreso) && valorIngreso > 0) {
            
@@ -72,19 +73,23 @@ export function agregarElemento() {
             totalEgresos = () => arrayEgresos.reduce((total, egreso) => total + egreso.getValor(), 0);
             
             cargarCabecero2(); // Llamar a la función para actualizar el cabecero
-            getVistaEgresos(); // Llamar a la función para actualizar la vista de egresos
+            cargarEgresos(); // pintar array egresos en index.html
+            
             //inicializarBotonAgregar(); // Llamar a la función para inicializar el botón de agregar
             console.log(`Egreso agregado: ${nuevoEgreso.getNombre()} : $${nuevoEgreso.getValor()}`);
             console.log(arrayEgresos);
-            //Pintar array egresos en html
+            
         } else {
-            console.error("Por favor, ingrese un nombre y un valor válido para el egreso.");
+            console.log("Por favor, ingrese un nombre y un valor válido para el egreso.");
         }
     }
+    document.getElementById('descripcion').value = '';
+    document.getElementById('valor').value = '';
 }
 
-// Función para mostrar los ingresos en la lista-ingresos en HTML
-function getVistaIngresos() {
+// Función para mostrar los ingresos en la lista_ingresos en HTML
+const cargarIngresos=() => 
+{
     
     // Crear un elemento HTML para mostrar el ingreso
     const listaIngresos = document.getElementById('lista_ingresos');
@@ -96,7 +101,7 @@ function getVistaIngresos() {
         const valor = elementoIngreso.getValor();
         const id = elementoIngreso.getID();
 
-        // Crear un nuevo ingreso en HTML dentro del contenedor lista-ingresos
+        // Crear un nuevo ingreso en HTML dentro del contenedor lista_ingresos
           listaIngresos.innerHTML += `
                                 <div class="elemento limpiarEstilos">
                                         <div class="elemento_descripcion">
@@ -108,7 +113,8 @@ function getVistaIngresos() {
                                             </div>
 
                                         <div class="elemento_eliminar">
-                                            <button class="elemento_eliminar--btn" data-id="${id}">
+                                            <button class="elemento_eliminar--btn" data-id="${id}" onclick="eliminarIngreso(${id})">
+                                            
                                                 <ion-icon name="close-circle-outline"></ion-icon>
                                             </button>
                                         </div><!-- termina elemento_eliminar-->
@@ -118,26 +124,11 @@ function getVistaIngresos() {
     }
 }   
 
-    export function eliminarIngresos(event) {
-        if (event.target.classList.contains('eliminar-ingreso')) {
-            const idIngreso = parseInt(event.target.dataset.id, 10);
-
-            // Confirmando que arrayIngresos esté disponible
-            arrayIngresos = arrayIngresos.filter(ingreso => {
-                if (typeof ingreso.getID === 'function') {
-                    return ingreso.getID() !== idIngreso;
-                }
-                return true; // mantiene el elemento si no tiene getID
-            });
-
-            console.log(`Ingreso con ID ${idIngreso} eliminado.`);
-        }
-    }
+    
 
 // Función para mostrar los egresos en la lista-egresos en HTML
-function getVistaEgresos() 
+const cargarEgresos= () => 
 {
-
     // Crear un elemento HTML para mostrar el ingreso
     const listaEgresos = document.getElementById('lista_egresos');
     listaEgresos.innerHTML = ''; // Limpiar la lista antes de agregar nuevos elementos
@@ -149,7 +140,7 @@ function getVistaEgresos()
         const valor = elementoEgreso.getValor();
         const id = elementoEgreso.getID();
 
-        // Crear un nuevo ingreso en HTML dentro del contenedor lista-ingresos
+        // Crear un nuevo ingreso en HTML dentro del contenedor lista_egresos
           listaEgresos.innerHTML += `
                                 <div class="elemento limpiarEstilos">
                                         <div class="elemento_descripcion">
@@ -161,7 +152,7 @@ function getVistaEgresos()
                                             </div>
 
                                         <div class="elemento_eliminar">
-                                            <button class="elemento_eliminar--btn" data-id="${id}">
+                                            <button class="elemento_eliminar--btn" data-id="${id}" onclick="eliminarEgreso(${id})">
                                                 <ion-icon name="close-circle-outline"></ion-icon>
                                             </button>
                                         </div><!-- termina elemento_eliminar-->
@@ -171,8 +162,26 @@ function getVistaEgresos()
 
     }   
 }
-    
- function inicializarBotonAgregar()
+
+// Función para eliminar un ingreso por su ID
+export function eliminarIngreso(id) {
+    arrayIngresos = arrayIngresos.filter(ingreso => ingreso.getID() !== id);
+    console.log(`Ingreso con ID ${id} eliminado.`);
+    cargarIngresos(); // vuelve a pintar la lista
+    cargarCabecero2(); // actualiza los totales y porcentajes
+}
+  window.eliminarIngreso = eliminarIngreso;  
+
+// Función para eliminar un egreso por su ID
+export function eliminarEgreso(id) {
+    arrayEgresos = arrayEgresos.filter(egreso => egreso.getID() !== id);
+    console.log(`Egreso con ID ${id} eliminado.`);
+    cargarEgresos();     // vuelve a pintar la lista de egresos
+    cargarCabecero2();   // actualiza los totales y porcentajes
+}
+window.eliminarEgreso = eliminarEgreso; // necesario para que funcione desde el HTML
+
+/*function inicializarBotonAgregar()
  {
     const agregarDescripcion = document.getElementById('descripcion');
     const agregarValor = document.getElementById('valor');
@@ -186,27 +195,10 @@ function getVistaEgresos()
     agregarValor.innerHTML = `
             <input class="agregar_valor" type="number" id="valor" step="any" placeholder="Valor"></input>
             `;
-    }
+    }*/
  
 
 
-    export function eliminarEgresos2(event) {
-        if (event.target.classList.contains('eliminar-egreso')) {
-            const idEgreso = parseInt(event.target.dataset.id, 10);
-
-            // Confirma que arrayIngresos esté disponible
-            arrayEgresos = arrayEgresos.filter(egreso => {
-                if (typeof egreso.getID === 'function') {
-                    return egreso.getID() !== idEgreso;
-                }
-                return true; // mantiene el elemento si no tiene getID
-            });
-
-            console.log(`Egreso con ID ${idEgreso} eliminado.`);
-        }
-    }
-
-    
     
     
     //Funcion para Pintar dinamicamente el html del cabecero
@@ -232,23 +224,9 @@ function getVistaEgresos()
         }
         //Escribimos el valor de porcentaje-egresos en HTML 
         document.getElementById('porcentaje-egresos').innerHTML = `${porcentajeEgreso.toFixed(2)}%`;
-    
-        // Inicializar los campos de entrada para agregar un nuevo ingreso o egreso
-        const agregarDescripcion = document.getElementById('descripcion');
-        const agregarValor = document.getElementById('valor');
-   
-        agregarDescripcion.innerHTML = '';
-        agregarValor.innerHTML = '';
 
-        agregarDescripcion.innerHTML = `
-            <input class="agregar_descripcion" type="text" id="descripcion" placeholder="Agregar descripcion">
-            `;
-        agregarValor.innerHTML = `
-            <input class="agregar_valor" type="number" id="valor" step="any" placeholder="Valor"></input>
-            `;
-    
         return { Totalpresupuesto, porcentajeIngreso,porcentajeEgreso };
-}
+    }
  
 
         
@@ -260,7 +238,7 @@ function getVistaEgresos()
 
     
     export function iniciarAplicacion() {
-       
+       console.log("Iniciando la aplicación...");
         // Llamar a la función para cargar el cabecero y mostrar los cálculos actualizados
         cargarCabecero2();
         
