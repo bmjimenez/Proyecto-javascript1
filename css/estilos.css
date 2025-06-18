@@ -171,17 +171,20 @@ body {
 .contenedor {
     width: 860px;
     margin: 60px auto;
+    
+   
 }
 
 .ingreso {
     float: left;
-    width: 370px;
-    margin-right: 70px;
+    width: 48%;
+    margin-right: 4%;
 }
 
 .egreso {
     float: left;
-    width: 370px;
+    width: 48%;
+    margin-right: 4%;
 }
 
 h2 {
@@ -191,8 +194,14 @@ h2 {
     margin-bottom: 15px;
 }
 
-.ingreso_titulo { color: #28B9B5; }
-.egreso_titulo { color: #FF5049; }
+.ingreso_titulo { 
+    color: #28B9B5;
+    text-align: center;
+     }
+.egreso_titulo { 
+    color: #FF5049;
+    text-align: center; 
+   }
 
 .elemento {
     padding: 13px;
