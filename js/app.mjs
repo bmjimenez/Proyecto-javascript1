@@ -237,8 +237,12 @@ window.eliminarEgreso = eliminarEgreso; // necesario para que funcione desde el 
 
         // Carga valores totales de ingresos y egresos
         document.getElementById('ingresos').innerHTML = `$${totalIngresos().toFixed(2)}`+ ' MXN';;
-        document.getElementById('egresos').innerHTML= `$${totalEgresos().toFixed(2)}`+ ' MXN';;
-
+        if (totalEgresos() === 0) {
+            document.getElementById('egresos').innerHTML = '$'+`0.00`+ ' MXN'; // Si no hay egresos, mostrar 0
+        } else
+        {
+        document.getElementById('egresos').innerHTML= "-" + `$${totalEgresos().toFixed(2)}`+ ' MXN';
+        }
         // Porcentaje de Egreso, validar que totalIngresos() no sea cero para evitar división por cero
         if (totalIngresos() === 0) {
             porcentajeEgreso = 0; // Si no hay ingresos, el porcentaje de egreso es 0
