@@ -1,11 +1,16 @@
-// Comienza  la definicion delas  funciones de la aplicacion
+// Curso: Programación  JavaScript I Tecmilenio
+// Autor: Jose Bernardo Moya Jimenez
+// Email:bmjimenez@hotmail.com
+// Profesor: Alan Jimenez
+// Fecha: 2023-10-01
+// Descripción: Este archivo contiene las funciones principales de la aplicación, incluyendo la inicialización,
+// la adición de ingresos y egresos, y la actualización del cabecero con los totales y porcentajes.
 
 // Importación de las clases Ingreso y Egreso
 import Ingreso from './Ingreso.mjs';
 import Egreso from './Egreso.mjs';
 
-
-// Inicialización de los arrays para almacenar ingresos y egresos
+// Inicialización de los arreglos para almacenar ingresos y egresos
 let arrayIngresos = [];
 let arrayEgresos = [];
 
@@ -13,7 +18,7 @@ let arrayEgresos = [];
  let totalIngresos = () => arrayIngresos.reduce((total, ingreso) => total + ingreso.getValor(), 0);
  let totalEgresos = () => arrayEgresos.reduce((total, egreso) => total + egreso.getValor(), 0);
 
-// Iniciliazondo Variables para almacenar el total del presupuesto, porcentaje de ingreso y porcentaje de egreso
+// Inicializando variables para almacenar el total del presupuesto, porcentaje de ingreso y porcentaje de egreso
 let Totalpresupuesto = 0;
 let porcentajeIngreso = 0;
 let porcentajeEgreso = 0;
@@ -26,8 +31,6 @@ window.onload = function () {
     // Eventos para los botones de agregar ingresos y egresos
     document.getElementById('agregar_btn').addEventListener('click', agregarElemento);
 
-    //Para el botón eliminar
-   // document.getElementById('eliminar_ingreso_1').addEventListener('click', eliminarIngresos)
 }
 
 
@@ -38,10 +41,11 @@ export function agregarElemento()
     const tipoIngreso = document.getElementById('tipo').value;
     const nombreIngreso = document.getElementById('descripcion').value;
     const valorIngreso = parseFloat(document.getElementById('valor').value)|| 0;
-    
+    // Asignamos los valores a las variables globales para poder usarlas en otras funciones
     window.tipoIngreso = tipoIngreso
     window.nombreIngreso = nombreIngreso
     window.valor = valorIngreso
+
     // Validación del tipo de ingreso (ingreso o egreso)
     if (tipoIngreso === 'ingreso') {
         // Validación de los campos de ingreso
@@ -53,9 +57,6 @@ export function agregarElemento()
             
             cargarCabecero2(); // Llamar a la función para actualizar el cabecero
             cargarIngresos(); //  //Pintar array ingresos en index.html
-            //inicializarBotonAgregar(); // Llamar a la función para inicializar el botón de agregar
-           
-
         } else {
             console.log("Por favor, ingrese un nombre y un valor válido para el ingreso.");
         }
@@ -72,15 +73,11 @@ export function agregarElemento()
             
             cargarCabecero2(); // Llamar a la función para actualizar el cabecero
             cargarEgresos(); // pintar array egresos en index.html
-            
-            //inicializarBotonAgregar(); // Llamar a la función para inicializar el botón de agregar
-            console.log(`Egreso agregado: ${nuevoEgreso.getNombre()} : $${nuevoEgreso.getValor()}`);
-            console.log(arrayEgresos);
-            
         } else {
             console.log("Por favor, ingrese un nombre y un valor válido para el egreso.");
         }
     }
+    // Limpiar los campos de entrada después de agregar el ingreso o egreso
     document.getElementById('descripcion').value = '';
     document.getElementById('valor').value = '';
 }
@@ -88,7 +85,6 @@ export function agregarElemento()
 // Función para mostrar los ingresos en la lista_ingresos en HTML
 const cargarIngresos=() => 
 {
-    
     // Crear un elemento HTML para mostrar el ingreso
     const listaIngresos = document.getElementById('lista_ingresos');
     listaIngresos.innerHTML = ''; // Limpiar la lista antes de agregar nuevos elementos
@@ -107,7 +103,7 @@ const cargarIngresos=() =>
                                         </div>
                                     <div class="derecha limpiarEstilos">
                                             <div class="elemento_valor">
-                                            ${valor.toFixed(2)} MXN
+                                            ${'+' + valor.toFixed(2)} MXN
                                             </div>
 
                                         <div class="elemento_eliminar">
@@ -127,7 +123,7 @@ const cargarIngresos=() =>
 // Función para mostrar los egresos en la lista-egresos en HTML
 const cargarEgresos= () => 
 {
-    // Crear un elemento HTML para mostrar el ingreso
+    // Crear un elemento HTML para mostrar el egreso
     const listaEgresos = document.getElementById('lista_egresos');
     listaEgresos.innerHTML = ''; // Limpiar la lista antes de agregar nuevos elementos
     // Obtener el elemento HTML donde se mostrarán los ingresos
@@ -181,19 +177,18 @@ if (resultado) {
     cargarIngresos(); // vuelve a pintar la lista
     
 }
-  window.eliminarIngreso = eliminarIngreso;  
+window.eliminarIngreso = eliminarIngreso;  
 
 // Función para eliminar un egreso por su ID
 export function eliminarEgreso(id) {
     let resultado = window.confirm("¿Estás seguro de que quieres eliminar este registro?");
 if (resultado) {
   // El usuario hizo clic en "Aceptar"
-   // Aquí iría el código para eliminar el elemento
+    // Aquí va el código para eliminar el elemento
     arrayEgresos = arrayEgresos.filter(egreso => egreso.getID() !== id);
     console.log(`Egreso con ID ${id} eliminado.`);
     } else {
   // El usuario hizo clic en "Cancelar"
-  // Aquí iría el código para manejar la cancelación
   console.log("Eliminación cancelada");
   window.alert("Eliminación cancelada");
   
@@ -203,40 +198,29 @@ if (resultado) {
     
 }
 window.eliminarEgreso = eliminarEgreso; // necesario para que funcione desde el HTML
-
-/*function inicializarBotonAgregar()
- {
-    const agregarDescripcion = document.getElementById('descripcion');
-    const agregarValor = document.getElementById('valor');
-    // Inicializar los campos de entrada para agregar un nuevo ingreso o egreso
-    agregarDescripcion.innerHTML = '';
-    agregarValor.innerHTML = '';
-
-    agregarDescripcion.innerHTML = `
-            <input class="agregar_descripcion" type="text" id="descripcion" placeholder="Agregar descripcion">
-            `;
-    agregarValor.innerHTML = `
-            <input class="agregar_valor" type="number" id="valor" step="any" placeholder="Valor"></input>
-            `;
-    }*/
- 
-
-
     
-    
-    //Funcion para Pintar dinamicamente el html del cabecero
-    function cargarCabecero2() 
-    {
+//Funcion para Pintar dinamicamente el html del cabecero
+function cargarCabecero2() 
+{
 
-        // Actualizamos los datos del presupuesto disponible,Total de Ingresos,Total de Egresos y porcentaje de egreso
-        let Totalpresupuesto =  totalIngresos()-totalEgresos() ;
-        console.log("Total del presupuesto: " + Totalpresupuesto);//linea temporal para ver el total del presupuesto en consola
-        let TotalpresupuestoHTML = `$${Totalpresupuesto.toFixed(2)}`+ ' MXN'; // Formateamos el total del presupuesto a dos decimales y agregamos la moneda
-        console.log("Total del presupuesto disponible HTML: " + TotalpresupuestoHTML);// linea temporal para ver el total del presupuesto en consola
-        document.getElementById('presupuesto').innerHTML = TotalpresupuestoHTML;
+    // Actualizamos los datos del presupuesto disponible,Total de Ingresos,Total de Egresos y porcentaje de egreso
+    let Totalpresupuesto =  totalIngresos()-totalEgresos() ;
+    console.log("Total del presupuesto: " + Totalpresupuesto);//linea temporal para ver el total del presupuesto en consola
+   let TotalpresupuestoHTML
+    if (Totalpresupuesto === 0) {
+        TotalpresupuestoHTML = `$${(0).toFixed(2)} MXN`;
+    }else if (Totalpresupuesto < 0) {
+    TotalpresupuestoHTML = `-$${Math.abs(Totalpresupuesto).toFixed(2)} MXN`;
+    }else {
+    TotalpresupuestoHTML = `+$${Totalpresupuesto.toFixed(2)} MXN`;
+}
 
-        // Carga valores totales de ingresos y egresos
-        document.getElementById('ingresos').innerHTML = `$${totalIngresos().toFixed(2)}`+ ' MXN';;
+
+    console.log("Total del presupuesto disponible HTML: " + TotalpresupuestoHTML);// linea temporal para ver el total del presupuesto en consola
+    document.getElementById('presupuesto').innerHTML = TotalpresupuestoHTML;
+
+    // Carga valores totales de ingresos y egresos
+    document.getElementById('ingresos').innerHTML = `$${totalIngresos().toFixed(2)}`+ ' MXN';;
         if (totalEgresos() === 0) {
             document.getElementById('egresos').innerHTML = '$'+`0.00`+ ' MXN'; // Si no hay egresos, mostrar 0
         } else
@@ -250,20 +234,12 @@ window.eliminarEgreso = eliminarEgreso; // necesario para que funcione desde el 
             porcentajeEgreso = ((totalEgresos() * 100)/ totalIngresos());
         }
         //Escribimos el valor de porcentaje-egresos en HTML 
-        document.getElementById('porcentaje-egresos').innerHTML = `${porcentajeEgreso.toFixed(2)}%`;
+        document.getElementById('porcentaje-egresos').innerHTML =  "+" +`${porcentajeEgreso.toFixed(2)}%`;
 
-        return { Totalpresupuesto, porcentajeIngreso,porcentajeEgreso };
+        return { Totalpresupuesto, porcentajeIngreso,porcentajeEgreso };    
     }
  
-
-        
- 
-
-
-
-    
-
-    
+    // Función para iniciar la aplicación, se ejecuta al cargar la página index.html
     export function iniciarAplicacion() {
        console.log("Iniciando la aplicación...");
         // Llamar a la función para cargar el cabecero y mostrar los cálculos actualizados
